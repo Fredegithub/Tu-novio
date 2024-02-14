@@ -1,0 +1,68 @@
+// Seleccionar todas las imágenes
+const imagenes = document.querySelectorAll('.imagen');
+
+// Agregar evento de 'click' a cada imagen
+imagenes.forEach(imagen => {
+  // Cuando se hace clic en la imagen
+  imagen.addEventListener('click', () => {
+    // Obtener la ruta de la imagen
+    const rutaImagen = imagen.getAttribute('src');
+    // Abrir la imagen en una nueva ventana del navegador
+    window.open(rutaImagen, '_blank');
+  });
+});
+
+// Seleccionar el botón
+const botonApretame = document.querySelector('.boton-apretame');
+
+// Función para mostrar el mensaje y la animación del corazón
+function mostrarMensaje() {
+  // Mostrar mensaje de alerta con la leyenda deseada
+  alert("Te quiero mucho mi princesita, te esperaré hasta el fin de mis días ❤️");
+}
+
+// Agregar evento de 'click' al botón
+botonApretame.addEventListener('click', mostrarMensaje);
+
+// Seleccionar el corazón
+const corazon = document.createElement('img');
+corazon.src = 'gif-heart-47.gif'; // Reemplaza 'ruta/a/imagen-del-corazon.png' con la ruta de tu imagen de corazón
+corazon.classList.add('corazon');
+
+// Agregar el corazón al cuerpo del documento
+document.body.appendChild(corazon);
+
+// Agregar evento de 'mouseenter' al botón
+botonApretame.addEventListener('mouseenter', () => {
+  // Obtener las coordenadas del botón
+  const rect = botonApretame.getBoundingClientRect();
+  // Posicionar el corazón encima del botón
+  corazon.style.top = rect.top + 'px';
+  corazon.style.left = rect.left + 'px';
+  // Mostrar el corazón
+  corazon.style.display = 'block';
+});
+
+// Agregar evento de 'mouseleave' al botón
+botonApretame.addEventListener('mouseleave', () => {
+  // Ocultar el corazón al sacar el cursor del botón
+  corazon.style.display = 'none';
+});
+
+// Detectar cuando se va a cambiar de página
+window.addEventListener('beforeunload', function(event) {
+    // Pausar la música
+    document.getElementById('musica').pause();
+});
+
+// Obtener el elemento de audio
+const musica = document.getElementById('musica');
+
+// Función para reiniciar la reproducción de la música
+function reiniciarMusica() {
+    musica.currentTime = 0; // Reiniciar al inicio
+    musica.play(); // Reproducir
+}
+
+// Detectar cuando la música termine
+musica.addEventListener('ended', reiniciarMusica);
